@@ -13,6 +13,7 @@ and so on.  Or just pull it from Docker Hub and live with the htandy username:
 ```
 $ docker pull andypohl/htcondor
 $ docker run -ti andypohl/htcondor
+[htandy ~]$ condor_on -all
 ```
 To use mount a non-container directory inside the container, use -v:
 ```
