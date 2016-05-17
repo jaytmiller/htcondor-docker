@@ -17,13 +17,16 @@ RUN yum -y install \
     echo -e "ALLOW_WRITE = *\n" >> /etc/condor/condor_config.local && \
     useradd --create-home --password 123456 htandy && \
     usermod -a -G condor htandy && \
+    echo -e "htandy ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     chmod -R g+w /var/{lib,log,lock,run}/condor && \    
 	yum clean all
 
-WORKDIR /home/htandy
 
 USER htandy
 
-RUN echo -e "condor_master > /dev/null 2>&1" >> /home/htandy/.bashrc
+RUN echo -e "export USER=$(whoami)" >> /home/htandy/.bashrc && \
+    echo -e "condor_master > /dev/null 2>&1" >> /home/htandy/.bashrc
 
+WORKDIR /home/htandy
+ 
 CMD [ "/bin/bash" ]
