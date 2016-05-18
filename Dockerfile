@@ -16,11 +16,12 @@ RUN yum -y install \
     echo -e "TRUST_UID_DOMAIN = True\n" >> /etc/condor/condor_config.local && \
     echo -e "ALLOW_WRITE = *\n" >> /etc/condor/condor_config.local && \
     useradd --create-home --password 123456 htandy && \
+    # setting the password with useradd like that doesn't work for some reason. \
+    echo 123456 | passwd --stdin htandy && \
     usermod -a -G condor htandy && \
     echo -e "htandy ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
     chmod -R g+w /var/{lib,log,lock,run}/condor && \    
 	yum clean all
-
 
 USER htandy
 
