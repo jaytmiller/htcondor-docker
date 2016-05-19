@@ -15,7 +15,7 @@ $ docker pull andypohl/htcondor
 $ docker run -ti andypohl/htcondor
 [htandy ~]$ condor_on -all
 ```
-To use mount a non-container directory inside the container, use -v:
+To use mount a non-container directory inside the container, use -v, e.g. to mount the current dir:
 ```
 $ docker run -ti --rm -v $(pwd):/home/htandy/thisdir andypohl/htcondor
 ```
