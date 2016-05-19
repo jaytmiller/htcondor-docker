@@ -19,4 +19,4 @@ To use mount a non-container directory inside the container, use -v:
 ```
 $ docker run -ti --rm -v $(pwd):/home/htandy/thisdir andypohl/htcondor
 ```
-Personally, I almost always just stick to the root user in Docker containers.  Having the htandy user is a little strange to me and I'm not 100% sure it's perfectly not screwy but so far it seems ok.
+Personally, I almost always just stick to the root user in Docker containers so it's strange not to.  I had trobule starting condor without errors unless I used an older condor on an older CentOs, e.g. [this one](https://hub.docker.com/r/jimwhite/condor-centos6/).  Having the htandy user is a little strange to me and I'm not 100% sure it's perfectly not screwy but so far it seems ok.  
