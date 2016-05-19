@@ -35,5 +35,5 @@ $ docker rm htcondor
 ## Concerns 
 I won't pretend I know if this is the best way to do this, but it seems to work.  Please mention any feedback or better yet contribute to the GitHub.
 ## Child Images
-  * The plan is to make a BOSCO-style personal HTCondor that could actually be used in real life.
+  * The plan is to make a BOSCO-style personal HTCondor that could actually be used in real life to maybe remote submit jobs.  
   * Pegasus is a nice Workflow Management System that runs on top of HTCondor (and some other batch schedulers).
