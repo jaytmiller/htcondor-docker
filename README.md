@@ -3,11 +3,11 @@ Dockerfile for making an image with a personal HTCondor.
 
 To use it, go to a directory where you want to have data mounted in a container.  Then start the container with:
 ```
-docker run --name htcondor -d -v $(pwd):/scratch andypohl/htcondor
+$ docker run --name htcondor -d -v $(pwd):/scratch andypohl/htcondor
 ```
 will start the master, schedd, collector, negotiator, and startd daemons via condor_master and mount the current directory on your computer inside a Docker container named "htcondor" as a directory called "/scratch".  Having this started and now detached, enter the container to run some condor commands like:
 ```
-docker exec -ti htcondor bash
+$ docker exec -ti htcondor bash
 ```
 You can check the status of the personal HTCondor pool with condor_status:
 ```
@@ -23,12 +23,14 @@ f9ac001ccefe       LINUX      X86_64 Unclaimed Idle      0.080 2002  0+00:00:04
 ```
 and you can change to the /scratch directory to find local submit files, etc. and go from there.  You can find the Docker container running with the docker ps command:
 ```
-docker ps
+$ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
 bcbb3e39a286        andypohl/htcondor   "/usr/sbin/start-cond"   16 minutes ago      Up 2 minutes                            htcondor
 ```
 and stop and remove the container by doing:
 ```
-docker stop htcondor
-docker rm htcondor
+$ docker stop htcondor
+$ docker rm htcondor
 ```
+## Concerns 
+I won't pretend I know if this is the best way to do this, but it seems to work.  Please mention any feedback or better yet contribute to the GitHub.
