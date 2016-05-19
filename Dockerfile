@@ -23,7 +23,7 @@ RUN yum -y install \
     echo 123456 | passwd --stdin ${USER} && \
     usermod -a -G condor ${USER} && \
     echo -e ${USER}" ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers && \
-    chmod -R g+w /var/{lib,log,lock,run}/condor && \   
+    chmod -R g+w /var/{lib,log,run}/condor && \   
     yum clean all
 
 USER ${USER}
