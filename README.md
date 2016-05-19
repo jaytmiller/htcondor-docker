@@ -21,4 +21,14 @@ f9ac001ccefe       LINUX      X86_64 Unclaimed Idle      0.080 2002  0+00:00:04
 
                Total        1     0       0         1       0          0
 ```
-and you can change to the /scratch directory to find local submit files, etc. and go from there.
+and you can change to the /scratch directory to find local submit files, etc. and go from there.  You can find the Docker container running with the docker ps command:
+```
+docker ps
+CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
+bcbb3e39a286        andypohl/htcondor   "/usr/sbin/start-cond"   16 minutes ago      Up 2 minutes                            htcondor
+```
+and stop and remove the container by doing:
+```
+docker stop htcondor
+docker rm htcondor
+```
