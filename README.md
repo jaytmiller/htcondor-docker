@@ -1,22 +1,24 @@
 # htcondor-docker
 Dockerfile for making an image with a personal HTCondor.
 
-To use it, pick a username you like (I like "htandy"), and build it yourself:
+To use it, go to a directory where you want to have data mounted in a container.  Then start the container with:
 ```
-$ docker build -t <your-image-name> .
-$ docker run -ti <your-image-name>
-[htandy ~]$ condor_on -all
-Sent "Spawn-All-Daemons" command to master htandy@d2a59693633
-[htandy ~]$ condor_status
+docker run --name htcondor -d -v $(pwd):/scratch andypohl/htcondor
 ```
-and so on.  Or just pull it from Docker Hub and live with the htandy username:
+will start the master, schedd, collector, negotiator, and startd daemons via condor_master and mount the current directory on your computer inside a Docker container named "htcondor" as a directory called "/scratch".  Having this started and now detached, enter the container to run some condor commands like:
 ```
-$ docker pull andypohl/htcondor
-$ docker run -ti andypohl/htcondor
-[htandy ~]$ condor_on -all
+docker exec -ti htcondor bash
 ```
-To use mount a non-container directory inside the container, use -v, e.g. to mount the current dir:
+You can check the status of the personal HTCondor pool with condor_status:
 ```
-$ docker run -ti --rm -v $(pwd):/home/htandy/thisdir andypohl/htcondor
+[root@f9ac001ccefe ~]# condor_status
+Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
+
+f9ac001ccefe       LINUX      X86_64 Unclaimed Idle      0.080 2002  0+00:00:04
+                     Machines Owner Claimed Unclaimed Matched Preempting
+
+        X86_64/LINUX        1     0       0         1       0          0
+
+               Total        1     0       0         1       0          0
 ```
-Personally, I almost always just stick to the root user in Docker containers so it's strange not to.  I had trobule starting condor without errors unless I used an older condor on an older CentOs, e.g. [this one](https://hub.docker.com/r/jimwhite/condor-centos6/).  Having the htandy user is a little strange to me and I'm not 100% sure it's perfectly not screwy but so far it seems ok.  
+and you can change to the /scratch directory to find local submit files, etc. and go from there.
