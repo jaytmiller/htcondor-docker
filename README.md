@@ -5,13 +5,9 @@ To use it, go to a directory where you want to have data mounted in a container.
 ```
 $ docker run --name htcondor -d -v $(pwd):/scratch andypohl/htcondor
 ```
-will start the master, schedd, collector, negotiator, and startd daemons via condor_master and mount the current directory on your computer inside a Docker container named "htcondor" as a directory called "/scratch".  Having this started and now detached, enter the container to run some condor commands like:
+will start the master, schedd, collector, negotiator, and startd daemons via condor_master and mount the current directory on your computer inside a Docker container named "htcondor" as a directory called "/scratch".  Having this started and now detached, you can run commands through the container like:
 ```
-$ docker exec -ti htcondor bash
-```
-You can check the status of the personal HTCondor pool with condor_status:
-```
-[root@f9ac001ccefe ~]# condor_status
+$ docker exec htcondor condor_status
 Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
 
 f9ac001ccefe       LINUX      X86_64 Unclaimed Idle      0.080 2002  0+00:00:04
