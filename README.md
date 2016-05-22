@@ -1,17 +1,13 @@
 # htcondor-docker
-Dockerfile for making an image with a personal HTCondor.
+Dockerfile for building a Docker image with the latest "personal" HTCondor on CentOS 7.  
 
 To use it, go to a directory where you want to have data mounted in a container.  Then start the container with:
 ```
-$ docker run --name htcondor -d -v $(pwd):/scratch andypohl/htcondor
+$ docker run --name htcondor -d -v $(pwd):/submit andypohl/htcondor
 ```
-will start the master, schedd, collector, negotiator, and startd daemons via condor_master and mount the current directory on your computer inside a Docker container named "htcondor" as a directory called "/scratch".  Having this started and now detached, enter the container to run some condor commands like:
+will start the master, schedd, collector, negotiator, and startd daemons via condor_master and mount the current directory on your computer inside a Docker container named "htcondor" as a directory called "/submit".  Having this started and now detached, you can run commands through the container like:
 ```
-$ docker exec -ti htcondor bash
-```
-You can check the status of the personal HTCondor pool with condor_status:
-```
-[root@f9ac001ccefe ~]# condor_status
+$ docker exec htcondor condor_status
 Name               OpSys      Arch   State     Activity LoadAv Mem   ActvtyTime
 
 f9ac001ccefe       LINUX      X86_64 Unclaimed Idle      0.080 2002  0+00:00:04
@@ -21,7 +17,7 @@ f9ac001ccefe       LINUX      X86_64 Unclaimed Idle      0.080 2002  0+00:00:04
 
                Total        1     0       0         1       0          0
 ```
-and you can change to the /scratch directory to find local submit files, etc. and go from there.  You can find the Docker container running with the docker ps command:
+You can find the Docker container running with the docker ps command:
 ```
 $ docker ps
 CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS               NAMES
