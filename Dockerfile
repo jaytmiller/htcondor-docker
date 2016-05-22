@@ -16,4 +16,7 @@ RUN yum -y install \
 COPY condor_config.docker_image /etc/condor/config.d/
 COPY start-condor.sh /usr/sbin/
 
+VOLUME ["/submit"]
+WORKDIR /submit
+
 CMD ["/usr/sbin/start-condor.sh"]
