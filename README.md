@@ -1,5 +1,5 @@
 # htcondor-docker
-Dockerfile for making an image with a personal HTCondor.
+Dockerfile for building a Docker image with the latest "personal" HTCondor on CentOS 7.  
 
 To use it, go to a directory where you want to have data mounted in a container.  Then start the container with:
 ```
