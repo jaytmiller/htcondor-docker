@@ -28,6 +28,30 @@ and stop and remove the container by doing:
 $ docker stop htcondor
 $ docker rm htcondor
 ```
+Now if it were only so simple.  HTCondor prefers submitting to be done non-root.  So there's a token user (by default called "submitter") built into the image.  THe UID and GID of this user is fixed at 1000, to simplify things from the Docker command line.  When executing a condor_submit, it's needed to add -u 1000:1000.  For example, [using the example from CHTC](http://chtc.cs.wisc.edu/helloworld.shtml):
+```
+$  docker exec -u 1000:1000 htcondor condor_submit hello-chtc.sub
+Submitting job(s)...
+3 job(s) submitted to cluster 1.
+```
+It may be worth making condor command aliases on the Docker host computer to make quicker work of those commands.  The docker container name can be fixed and the UID/GID can be fixed, so it's pretty easy:
+```
+$ alias condor_submit='docker exec -u 1000:1000 htcondor condor_submit'
+$ alias condor_q='docker exec -u 1000:1000 htcondor condor_q'
+$ condor_submit hello-chtc.sub
+Submitting job(s)...
+3 job(s) submitted to cluster 3.
+$ condor_q
+
+
+-- Schedd: b3dcc9772a84 : <172.17.0.2:9618?...
+ ID      OWNER            SUBMITTED     RUN_TIME ST PRI SIZE CMD
+   3.0   submitter       5/24 15:01   0+00:00:02 R  0    0.0 hello-chtc.sh 0
+   3.1   submitter       5/24 15:01   0+00:00:00 I  0    0.0 hello-chtc.sh 1
+   3.2   submitter       5/24 15:01   0+00:00:00 I  0    0.0 hello-chtc.sh 2
+
+3 jobs; 0 completed, 0 removed, 2 idle, 1 running, 0 held, 0 suspended
+```
 ## Concerns 
 I won't pretend I know if this is the best way to do this, but it seems to work.  Please mention any feedback or better yet contribute to the GitHub.
 ## Child Images
