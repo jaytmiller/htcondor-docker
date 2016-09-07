@@ -22,7 +22,8 @@ RUN yum -y install \
     groupadd -g ${GID} ${SUBMIT_USER} && \
     useradd -m -u ${UID} -g ${GID} ${SUBMIT_USER} && \
     usermod -a -G condor ${SUBMIT_USER} && \
-    echo ${PASS} | passwd --stdin ${SUBMIT_USER}    
+    echo ${PASS} | passwd --stdin ${SUBMIT_USER} && \
+    sed -i 's/\(^Defaults.*requiretty.*\)/#\1/' /etc/sudoers 
 
 # KNOBS and startup script
 COPY condor_config.docker_image /etc/condor/config.d/
