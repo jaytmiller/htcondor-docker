@@ -33,4 +33,7 @@ COPY start-condor.sh /usr/sbin/
 VOLUME ["/home/${SUBMIT_USER}/submit"]
 WORKDIR /home/${SUBMIT_USER}/submit
 
+# Use this if you're not going to restart HTCondor in the container.
+# If you do need to do that, you're better off running the condor_master
+# command manuallh
 CMD ["/usr/sbin/start-condor.sh"]
