@@ -16,6 +16,14 @@ CONDOR_ADMIN=apohl@morgridge.org
 # I wonder if this setting is really required.  The RPM page said it is.
 MAIL=/usr/bin/mail
 
+USE Role : Personal
+
 # Possibly unnecessary.
 TRUST_UID_DOMAIN = True
+ALLOW_READ = *
 ALLOW_WRITE = *
+ALLOW_NEGOTIATOR = *
+
+# Cannot use cgroups within docker, they are already taken because Docker
+# itself uses cgroups, and cgroups don't nest.
+BASE_CGROUP =
