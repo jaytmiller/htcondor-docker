@@ -32,10 +32,11 @@ COPY start-condor.sh /usr/sbin/
 
 # Signal to User of this image use this directory (run with -v)
 VOLUME ["/home/${SUBMIT_USER}/submit"]
-WORKDIR /home/${submit_USER}/submit
+WORKDIR /home/${SUBMIT_USER}/submit
 
-# Copy in an example HTCondor submission
+# Copy in an example HTCondor submission and fix permissions
 COPY hello.s* /home/${SUBMIT_USER}/example/
+RUN chown -R ${SUBMIT_USER}:${SUBMIT_USER} /home/${SUBMIT_USER}/example
 
 # Use this if you're not going to restart HTCondor in the container.
 # If you do need to do that, you're better off running the condor_master
