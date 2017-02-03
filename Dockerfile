@@ -38,6 +38,13 @@ WORKDIR /home/${SUBMIT_USER}/submit
 COPY hello.s* /home/${SUBMIT_USER}/example/
 RUN chown -R ${SUBMIT_USER}:${SUBMIT_USER} /home/${SUBMIT_USER}/example
 
+# Add R to this branch.
+RUN  yum install -y epel-release && \
+     yum install -y 'R-*' && \
+     yum clean all && \
+     Rscript -e 'install.packages("devtools", repos="https://cran.rstudio.com/")' && \
+     Rscript -e 'devtools::install_github("mllg/batchtools")'
+
 # Use this if you're not going to restart HTCondor in the container.
 # If you do need to do that, you're better off running the condor_master
 # command manually

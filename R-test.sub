@@ -1,0 +1,14 @@
+# R-test.sub
+
+universe = vanilla
+executable = R-test.sh
+
+log = R-test.log
+error = R-test.err
+output = R-test.out
+
+request_cpus = 1
+request_memory = 500MB
+request_disk = 1MB
+
+queue
