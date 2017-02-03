@@ -35,7 +35,7 @@ VOLUME ["/home/${SUBMIT_USER}/submit"]
 WORKDIR /home/${submit_USER}/submit
 
 # Copy in an example HTCondor submission
-COPY hello.s* /home/${SUBMIT_USER}/example
+COPY hello.s* /home/${SUBMIT_USER}/example/
 
 # Use this if you're not going to restart HTCondor in the container.
 # If you do need to do that, you're better off running the condor_master
