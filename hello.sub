@@ -1,4 +1,4 @@
-# hello-chtc.sub
+# hello.sub
 # My very first HTCondor submit file
 #
 # Specify the HTCondor Universe (vanilla is the default and is used
@@ -7,8 +7,8 @@
 #  Wherever you see $(Cluster), HTCondor will insert the queue number
 #  assigned to this set of jobs at the time of submission.
 universe = vanilla
-log = hello-chtc_$(Cluster).log
-error = hello-chtc_$(Cluster)_$(Process).err
+log = hello_$(Cluster).log
+error = hello_$(Cluster)_$(Process).err
 #
 # Specify your executable (single binary or a script that runs several
 #  commands), arguments, and a files for HTCondor to store standard
@@ -17,7 +17,7 @@ error = hello-chtc_$(Cluster)_$(Process).err
 #  and increasing for the relevant number of jobs.
 executable = hello.sh
 arguments = $(Process)
-output = hello-chtc_$(Cluster)_$(Process).out
+output = hello_$(Cluster)_$(Process).out
 #
 # Specify that HTCondor should transfer files to and from the
 #  computer where each job runs. The last of these lines *would* be
