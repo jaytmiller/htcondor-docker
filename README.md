@@ -1,7 +1,7 @@
 # htcondor-docker
-Dockerfile for building a Docker image with the latest "personal" HTCondor on CentOS 7.  To run the test:
+Dockerfile for building a Docker image with the latest "personal" HTCondor (stable release) on CentOS 7.  To run the test:
 ```
-me@laptop$ docker run -d -h htcondor --name htcondor andypohl/htcondor
+me@laptop$ docker run -d -h htcondor --name htcondor andypohl/htcondor:stable
 63929dc053607d52071c99933520ff0bbda887e125c4bd5866ae976283626b5a
 me@laptop$ docker exec -ti -u 1000:1000 htcondor bash
 [submitter@htcondor submit]$ cd ../example/
