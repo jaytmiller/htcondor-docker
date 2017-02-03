@@ -35,12 +35,20 @@ VOLUME ["/home/${SUBMIT_USER}/submit"]
 WORKDIR /home/${SUBMIT_USER}/submit
 
 # Copy in an example HTCondor submission and fix permissions
-COPY hello.s* /home/${SUBMIT_USER}/example/
+COPY R-test.s* /home/${SUBMIT_USER}/example/
 RUN chown -R ${SUBMIT_USER}:${SUBMIT_USER} /home/${SUBMIT_USER}/example
 
 # Add R to this branch.
 RUN  yum install -y epel-release && \
-     yum install -y 'R-*' && \
+     yum install -y openssl-devel \
+                    libcurl-devel \
+                    libgomp \ 
+                    ca-certificates \
+                    git \
+                    perl \
+                    rsync \
+                    wget \
+                    'R-*' && \
      yum clean all && \
      Rscript -e 'install.packages("devtools", repos="https://cran.rstudio.com/")' && \
      Rscript -e 'devtools::install_github("mllg/batchtools")'
