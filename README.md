@@ -16,7 +16,7 @@ slot2@htcondor LINUX      X86_64 Unclaimed Idle      0.000  999  0+00:00:03
         X86_64/LINUX        2     0       0         2       0          0      0
 
                Total        2     0       0         2       0          0      0
-[submitter@htcondor example]$ condor_submit R-test.sub
+[submitter@htcondor example]$ condor_submit hello.sub
 Submitting job(s).
 1 job(s) submitted to cluster 1.
 ```
