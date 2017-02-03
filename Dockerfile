@@ -23,6 +23,7 @@ RUN yum -y install \
     useradd -m -u ${UID} -g ${GID} ${SUBMIT_USER} && \
     usermod -a -G condor ${SUBMIT_USER} && \
     echo ${PASS} | passwd --stdin ${SUBMIT_USER} && \
+    mkdir /home/${SUBMIT_USER}/example && \
     sed -i 's/\(^Defaults.*requiretty.*\)/#\1/' /etc/sudoers 
 
 # KNOBS and startup script
@@ -31,9 +32,12 @@ COPY start-condor.sh /usr/sbin/
 
 # Signal to User of this image use this directory (run with -v)
 VOLUME ["/home/${SUBMIT_USER}/submit"]
-WORKDIR /home/${SUBMIT_USER}/submit
+WORKDIR /home/${submit_USER}/submit
+
+# Copy in an example HTCondor submission
+COPY hello.s* /home/${SUBMIT_USER}/example
 
 # Use this if you're not going to restart HTCondor in the container.
 # If you do need to do that, you're better off running the condor_master
-# command manuallh
+# command manually
 CMD ["/usr/sbin/start-condor.sh"]
