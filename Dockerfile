@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:centos6
 
 MAINTAINER Andy Pohl <apohl@morgridge.org>
 
@@ -15,7 +15,7 @@ RUN yum -y install \
          openssh-clients && \
     curl -O http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && \
     rpm --import RPM-GPG-KEY-HTCondor && \
-    yum-config-manager --add-repo https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel7.repo && \
+    yum-config-manager --add-repo https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel6.repo && \
     yum -y install condor && \
     yum clean all && \
     rm -f RPM-GPG-KEY-HTCondor && \
