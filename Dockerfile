@@ -13,6 +13,7 @@ RUN yum -y install \
          yum-utils \
          sudo \
          openssh-clients && \
+    yum -y groupinstall 'Development Tools' && \
     curl -O http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && \
     rpm --import RPM-GPG-KEY-HTCondor && \
     yum-config-manager --add-repo https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel6.repo && \
