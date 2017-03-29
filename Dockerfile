@@ -25,7 +25,9 @@ RUN yum -y install \
     usermod -a -G condor ${SUBMIT_USER} && \
     echo ${PASS} | passwd --stdin ${SUBMIT_USER} && \
     mkdir /home/${SUBMIT_USER}/example && \
-    sed -i 's/\(^Defaults.*requiretty.*\)/#\1/' /etc/sudoers 
+    sed -i 's/\(^Defaults.*requiretty.*\)/#\1/' /etc/sudoers && \
+    rm -f /etc/localtime && \
+    ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
 
 # KNOBS and startup script
 COPY condor_config.docker_image /etc/condor/config.d/
