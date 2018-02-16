@@ -12,12 +12,13 @@ ENV PASS 123456
 RUN yum -y install \
          yum-utils \
          sudo \
+         which \
          openssh-clients && \
     yum -y groupinstall 'Development Tools' && \
     curl -O http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor && \
     rpm --import RPM-GPG-KEY-HTCondor && \
     yum-config-manager --add-repo https://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-development-rhel7.repo && \
-    yum -y install condor && \
+    yum -y install condor-bosco && \
     yum clean all && \
     rm -f RPM-GPG-KEY-HTCondor && \
     groupadd -g ${GID} ${SUBMIT_USER} && \
