@@ -42,6 +42,15 @@ WORKDIR /home/${SUBMIT_USER}/submit
 COPY hello.s* /home/${SUBMIT_USER}/example/
 RUN chown -R ${SUBMIT_USER}:${SUBMIT_USER} /home/${SUBMIT_USER}/example
 
+# For Grid jobs where perhaps an ssh key is forwarded into the container,
+# we need to 'ssh -A' into the container instead of exec'ing in 
+RUN yum install -y openssh-server && \
+    yum clean all && \
+    mkdir /var/run/sshd && \
+    ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key -N ''
+
+EXPOSE 22
+
 # Use this if you're not going to restart HTCondor in the container.
 # If you do need to do that, you're better off running the condor_master
 # command manually
