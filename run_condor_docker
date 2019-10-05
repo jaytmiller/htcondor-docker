@@ -1,0 +1,4 @@
+#! /bin/sh
+
+docker run -d -p 8888:8888 -h htcondor --name htcondor $*
+docker exec -ti -u 1000:1000 htcondor bash

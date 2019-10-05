@@ -1,0 +1,14 @@
+#! /usr/bin/env python
+#-*-python-*-
+
+import sys
+from urllib.request import urlretrieve
+
+
+MAST_URI_PREFIX = "https://pwjwdmsauiweb.stsci.edu/portal/Download/file?uri=mast:JWST/product/"
+
+def download_mast(data_name,  local_name):
+    return urlretrieve(MAST_URI_PREFIX + data_name,  local_name)
+
+if __name__ == "__main__":
+    download_mast(sys.argv[1], sys.argv[2])

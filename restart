@@ -1,0 +1,7 @@
+#! /bin/sh
+
+export CONTAINER=`docker ps -q -l`
+
+docker start -a -i $CONTAINER
+
+docker exec -it $CONTAINER /bin/bash

@@ -1,0 +1,5 @@
+#! /bin/sh
+
+export CONTAINER=${1:-`docker ps -q -l`}
+
+docker exec -it $CONTAINER /bin/bash
